@@ -1,0 +1,21 @@
+{
+  "name": "npm-module",
+  "version": "1.0.0",
+  "main": "NPM.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon NPM.js"
+  },
+  "author": "Mariana",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "validator": "^13.11.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
