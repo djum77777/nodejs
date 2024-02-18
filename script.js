@@ -10,30 +10,32 @@ async function getData(req,res)
     {
         const res = await fetch("http://localhost:3000")
         const data = await res.json();
+        console.log(data);
         data.map((item) => {
-        console.log(item);
+        console.log(`Todo : ${item.ToDo} & ID : ${item.ID}`)
         posts.innerHTML+=
         //place our html code here
         `
         <div>
         <p>${item.ToDo}</p>
         <span class="options">
-        <i onClick="editPost(this)" class="fas fa-edit"></i>
-        <i onClick="deletePost(this)" class="fas fa-trash-alt"></i>
+        <i onClick="editPost(${item.ID})" class="fas fa-edit"></i>
+        <i onClick="deletePost(${item.ID})" class="fas fa-trash-alt"></i>
         </span>
         </div>
-        `})  
+        `
+      })
     }
     catch (err)
-    {console.log(err);}
+    {console.log(err)}
  }
- getData();
+ getData()
 
 //add eventListener that will response on submit button clicked
 form.addEventListener("submit",(e)=>{
   //to prevent it refreshed by it self everytime we pressed submit
   e.preventDefault()
-  console.log("button clicked");
+  //console.log("button clicked")
   CekForm()
 })
 
@@ -44,24 +46,20 @@ form.addEventListener("submit",(e)=>{
   if(input.value==="")
   {
     msg.innerHTML="please input the text"
-    console.log("mesti isi data");
+    //console.log("mesti isi data");
   }
   //kl ada input
   else
   {
     msg.innerHTML=""
-    console.log("data terisi");
     acceptData();
   }
  }
 
 async function acceptData()
- {
-    
+ { 
     try 
     {
-        //const isiID= await res.json()
-        //const nomorID=isiID.length+1
         const res = await fetch ("http://localhost:3000", {
           method : "POST",
           body: JSON.stringify( {
@@ -71,8 +69,7 @@ async function acceptData()
             "Content-type": "application/json; charset=UTF-8"
         }
         })
-        data=input.value;
-        postData() 
+        input.value=""
     }
     catch(err)
     {
@@ -80,41 +77,33 @@ async function acceptData()
     }
  }
 
- let postData=()=>
- {
-    posts.innerHTML+=
-    //place our html code here
-    `
-    <div>
-    <p>${data}</p>
-    <span class="options">
-    <i onClick="editPost(this)" class="fas fa-edit"></i>
-    <i onClick="deletePost(this)" class="fas fa-trash-alt"></i>
-    </span>
-    </div>
-    `
-    //make the text area blank everytime we post/stored data
-    input.value=""
- }
-
-async function deletePost(e)
+async function deletePost(ID)
 {
- //we delete 2 tier above
- try {
-  const res = await fetch(`http://localhost:3000/${e}`, {
+  console.log(ID);
+  try {
+    console.log("data ID yg dihapus",ID);
+    const res = await fetch(`http://localhost:3000/${ID}`, {
       method: "DELETE"
     });
   } 
   catch (err) {
   console.log(err);
-  };
- e.parentElement.parentElement.remove();
+  }
 }
 
-let editPost=(e)=>
+async function editPost(ID)
 {
-  //everytime we click on edit it will return the previous text to the input text area
-  input.value=e.parentElement.previousElementSibling.innerHTML;
-  //and then we delete the line that we want to edit and click post it with the new one
-  e.parentElement.parentElement.remove(); 
+  input.value=ID.parentElement.previousElementSibling.innerHTML;
+  console.log(ID);
+  try {
+    const res=await fetch(`http://localhost:3000/${ID}`,
+    {
+      method : "PUT",
+      body : JSON.stringify({
+        ToDo: document.getElementById("input").value}
+      )
+    })}
+  catch (err) {
+    console.log(err);
+  }
 }
