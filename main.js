@@ -9,6 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static('public'))
 
 //get data from Json and then send it to script and display it to HTML
 app.get("/",(req,res)=>

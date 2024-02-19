@@ -1,13 +1,5 @@
 [
   {
-    "ID": "51a6d48d-1ad9-4a91-81af-7c55409ce8f1",
-    "ToDo": "Data 10"
-  },
-  {
-    "ID": "60d0444b-114d-4421-9dbe-afb610d1171c",
-    "ToDo": "Data terbaru diubah"
-  },
-  {
     "ID": "fe0279dd-8d9d-4862-a6db-6a4e4ff0e60e",
     "ToDo": "drinking coffee"
   },
@@ -20,19 +12,11 @@
     "ToDo": "drinking coffee again"
   },
   {
-    "ID": "0b47d4a4-03f0-46c1-bdb5-8c343ed981f8",
-    "ToDo": "testing data"
+    "ID": "91283732-0ce3-43f1-9812-81001a4378aa",
+    "ToDo": "study with friends"
   },
   {
-    "ID": "258a339b-924e-474e-9378-bc493e95cde5",
-    "ToDo": "test"
-  },
-  {
-    "ID": "793e20a7-28fd-4df0-af56-f6ff24565a33",
-    "ToDo": "test lagi"
-  },
-  {
-    "ID": "54f57bcd-f9ce-44b0-ba24-3d4a2c63261b",
-    "ToDo": "coba lagi dah"
+    "ID": "2036720d-1ca3-482f-bb1a-f6d8667eb5f1",
+    "ToDo": "contoh"
   }
 ]

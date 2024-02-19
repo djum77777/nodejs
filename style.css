@@ -7,6 +7,12 @@ body {
     display: flex;
     gap: 50px;
   }
+  .inner{
+    max-height: 400px;
+    overflow-y: scroll;
+    border: 2px solid #f8f5f8;
+    padding: 10px;
+  }
   
   #posts {
     width: 400px;
@@ -20,7 +26,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+    color: rgb(79, 2, 79);
+    font-weight: 600;
+    font-family:serif}
   
   .options {
     display: flex;
@@ -29,4 +37,8 @@ body {
   
   #msg {
     color: red;
+  }
+  h1 {
+    color:darkmagenta; font-weight: 600;
+
   }

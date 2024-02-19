@@ -17,7 +17,7 @@ async function getData(req,res)
         //place our html code here
         `
         <div>
-        <p>${item.ToDo}</p>
+        <p>${item.ID}</p>
         <span class="options">
         <i onClick="editPost(${item.ID})" class="fas fa-edit"></i>
         <i onClick="deletePost(${item.ID})" class="fas fa-trash-alt"></i>
@@ -93,7 +93,9 @@ async function deletePost(ID)
 
 async function editPost(ID)
 {
-  input.value=ID.parentElement.previousElementSibling.innerHTML;
+  
+console.log(ID);
+  /*input.value=ID.parentElement.previousElementSibling.innerHTML;
   console.log(ID);
   try {
     const res=await fetch(`http://localhost:3000/${ID}`,
@@ -105,5 +107,5 @@ async function editPost(ID)
     })}
   catch (err) {
     console.log(err);
-  }
+  }*/
 }
