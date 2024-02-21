@@ -3,6 +3,9 @@ let form = document.getElementById("form")
 let input = document.getElementById("input")
 let msg = document.getElementById("msg")
 let posts=document.getElementById("posts")
+let dDate=document.getElementById("dDate")
+let dTime=document.getElementById("dTime")
+
 
 async function getData(req,res)
  {
@@ -10,17 +13,19 @@ async function getData(req,res)
     {
         const res = await fetch("http://localhost:3000")
         const data = await res.json();
-        console.log(data);
+        //console.log(data);
         data.map((item) => {
         console.log(`Todo : ${item.ToDo} & ID : ${item.ID}`)
         posts.innerHTML+=
         //place our html code here
         `
         <div>
-        <p>${item.ID}</p>
+        <p>${item.ToDo}</p>
+        <p>${item.dDate}</p>
+        <p>${item.dTime}</p>
         <span class="options">
-        <i onClick="editPost(${item.ID})" class="fas fa-edit"></i>
-        <i onClick="deletePost(${item.ID})" class="fas fa-trash-alt"></i>
+        <i onClick="editPost('${item.ID}')" class="fas fa-edit"></i>
+        <i onClick="deletePost('${item.ID}')" class="fas fa-trash-alt"></i>
         </span>
         </div>
         `
@@ -42,11 +47,20 @@ form.addEventListener("submit",(e)=>{
 //untuk pengecekan isi input ada ato tidak
  CekForm=()=>
  {
+    console.log("tgl:",dDate.value);
+    console.log("post",input.value);
   //kl tidak ada input
-  if(input.value==="")
+  if(dDate.value==="")
   {
-    msg.innerHTML="please input the text"
-    //console.log("mesti isi data");
+    msg.innerHTML="please input the date"
+  }
+  else if(input.value==="")
+  {
+    msg.innerHTML="please input the information"
+  }
+  else if(dTime.value==="")
+  {
+    msg.innerHTML="please input time"
   }
   //kl ada input
   else
@@ -63,7 +77,9 @@ async function acceptData()
         const res = await fetch ("http://localhost:3000", {
           method : "POST",
           body: JSON.stringify( {
-            ToDo: document.getElementById("input").value
+            ToDo: document.getElementById("input").value,
+            dDate:document.getElementById("dDate").value,
+            dTime:document.getElementById("dTime").value
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -93,9 +109,7 @@ async function deletePost(ID)
 
 async function editPost(ID)
 {
-  
-console.log(ID);
-  /*input.value=ID.parentElement.previousElementSibling.innerHTML;
+  //input.value=ID.parentElement.previousElementSibling.innerHTML;
   console.log(ID);
   try {
     const res=await fetch(`http://localhost:3000/${ID}`,
@@ -103,9 +117,11 @@ console.log(ID);
       method : "PUT",
       body : JSON.stringify({
         ToDo: document.getElementById("input").value}
-      )
+      ), headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
     })}
   catch (err) {
     console.log(err);
-  }*/
+  }
 }

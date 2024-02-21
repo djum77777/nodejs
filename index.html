@@ -9,25 +9,30 @@
 </head>
 <body>
     <h1 align="center">Noob Planner</h1>
-    <div class ="container">
-        <div class="left">
-            <form id="form">
-                <label for="post"> Plan your work and work your plan <i class="fas fa-clock"></i></label>
-                <br><br>
-                <textarea name="post" id="input" cols="30" rows="5"></textarea>
-                
-                <div id="msg"><br></div>
-                <br>
-                <button type="submit"> Post </button>
-            </form>
-        </div>
-        <div class="right">
-            <h3>Need to accomplish</h3>
-            <div class="inner" id="posts">
-            <!--posts entry-->    
-            </div>
+    <div align ="center" class="postNote">
+        <form id="form">
+            <label for="post"> Plan your work and work your plan <i class="fas fa-clock"></i></label>
+            <br><br>
+            <textarea name="post" id="input" cols="30" rows="5"></textarea>
+            <br> <p>The current date is: <span id="date"></span></p> 
+            <label>Due Date : </label>
+            <input type="date" id="dDate"> <input type="time" id="dTime">
+            <div id="msg"><br></div>
+            <br>
+            <button type="submit"> Post </button>
+        </form>
+    </div>
+    <div align="center" class="todolist">
+        <h3>Need to accomplish</h3>
+        <div class="inner" id="posts">
+        <!--posts entry-->    
         </div>
     </div>
-    <script src="script.js"></script>
+    
+<script>var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    document.getElementById('date').textContent = date;</script>
+<script src="script.js"></script>
+
 </body>
 </html>

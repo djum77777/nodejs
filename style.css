@@ -1,21 +1,18 @@
 body {
     font-family: sans-serif;
     margin: 0 50px;
+    background-color: cadetblue;
   }
-  
-  .container {
-    display: flex;
-    gap: 50px;
-  }
+
   .inner{
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: scroll;
     border: 2px solid #f8f5f8;
     padding: 10px;
   }
   
   #posts {
-    width: 400px;
+    width: 500px;
   }
  
   i{
@@ -39,6 +36,7 @@ body {
     color: red;
   }
   h1 {
-    color:darkmagenta; font-weight: 600;
+    color:rgb(247, 246, 247); font-weight: 500;
+    background-color: brown;
 
   }

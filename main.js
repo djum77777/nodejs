@@ -3,6 +3,8 @@ const app=express();
 const port = 3000;
 const fs= require ('fs')
 var cors = require('cors');
+const dateFormat = require('date-and-time');
+
 
 //random unique ID NPM
 const { v4: uuidv4 } = require('uuid');
@@ -25,12 +27,16 @@ app.post("/",(req,res)=>
   //console.log("post",getData);
   //const newData=req.body //ambil isi body html dr request
   //console.log("added data",newData);
-  let {ID,ToDo}=req.body
+  let {ID,ToDo,dDate,dTime}=req.body
+  //const now=new Date();
+  //console.log(dateFormat(dDate,"DD MMM YYYY"))
   ID=uuidv4();
   const newData=
     {
       ID,
-      ToDo
+      ToDo,
+      dDate,
+      dTime
     }
   //console.log("data baru",newData);
   getData.push(newData)
