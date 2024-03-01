@@ -1,20 +1,17 @@
 body {
     font-family: sans-serif;
     margin: 0 50px;
-    background-color: cadetblue;
+    background-color: rgb(101, 201, 204);
   }
-
-  .inner{
-    max-height: 200px;
-    overflow-y: scroll;
-    border: 2px solid #f8f5f8;
-    padding: 10px;
-  }
-  
   #posts {
     width: 500px;
+    font-size: 14px;
   }
- 
+  p
+  {
+    text-align: right;
+    font-family: sans-serif;
+  }
   i{
     cursor:pointer;
   }
@@ -33,10 +30,81 @@ body {
   }
   
   #msg {
-    color: red;
+    color: rgb(247, 244, 244);
+    background-color: red;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  #msg span{
+    background-color: rgb(141, 30, 11);
   }
   h1 {
     color:rgb(247, 246, 247); font-weight: 500;
     background-color: brown;
+  }
+  table {
+    font-family: arial, sans-serif;
+    
+    width: 100%;
+   
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  th{
+    background-color: brown;
+    color: white;
+  }
+  td{
+    background-color:white ;
+  }
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
 
+  /* styling button */
+  .button {
+  display: inline-block;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #212524;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 6px #999;
+}
+
+.button:hover {background-color: #424542}
+
+.button:active {
+  background-color: #c6cdc6;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+textarea {
+  background-color: white;
+ /* background-image: url('./public/writing-icon-17094.png');*/
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: 10px 20px;
+  opacity: 0.7;
+  padding-left: 40px;
+  border-radius: 25px;
+  border: 2px solid #656564;
+  padding: 20px; 
+  width: 350px;
+  height: 15px;  
+  }
+  caption{
+    text-decoration: underline;
   }

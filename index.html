@@ -5,33 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/public/todolist.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
 </head>
 <body>
     <h1 align="center">Noob Planner</h1>
+    <p id="dateLoc">Date: <span id="curDate"></span></p> 
     <div align ="center" class="postNote">
         <form id="form">
             <label for="post"> Plan your work and work your plan <i class="fas fa-clock"></i></label>
             <br><br>
-            <textarea name="post" id="input" cols="30" rows="5"></textarea>
-            <br> <p>The current date is: <span id="date"></span></p> 
-            <label>Due Date : </label>
+            <textarea name="post" id="input" placeholder="type here..."></textarea>
+            
+            <br> 
+            <label>Set the due date : </label>
             <input type="date" id="dDate"> <input type="time" id="dTime">
-            <div id="msg"><br></div>
-            <br>
-            <button type="submit"> Post </button>
+            <br><div id="msg"><span><br></span></div><br>
+            <button class="button" title="click to post" type="submit"> Post </button>
         </form>
+        <br>
     </div>
     <div align="center" class="todolist">
-        <h3>Need to accomplish</h3>
-        <div class="inner" id="posts">
+        <table id="posts">
+            <caption><b>TO DO LIST</b></caption>
+            <tr>
+                <th style="width: 50%;">To Do</th>
+                <th>Due Date</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
         <!--posts entry-->    
-        </div>
     </div>
     
-<script>var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    document.getElementById('date').textContent = date;</script>
+<script>
+var today = new Date();
+var curDate = today.getFullYear() + '-' + '0'+(today.getMonth() + 1) + '-' + today.getDate();
+document.getElementById('curDate').textContent = curDate;
+</script>
 <script src="script.js"></script>
 
 </body>
