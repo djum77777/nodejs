@@ -15,15 +15,13 @@ async function getData(req,res)
       const res = await fetch("http://localhost:5000")
       const data = await res.json();
       
-      const DueDate = new Date(data[1].ddate);
-      let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(DueDate);
-      let month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(DueDate);
-      let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(DueDate);
-      console.log(`${year}-${month}-${day}`);
-      
+      //const DueDate = new Date(data[1].ddate);
+      //let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(DueDate);
+      //let month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(DueDate);
+      //let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(DueDate);
+      //console.log(`${year}-${month}-${day}`);
       data.forEach((item) => {
-
-        console.log(`Todo : ${item.todo} & ID : ${item.ddate}`)
+      //console.log(`Todo : ${item.todo} & ID : ${item.id}`)
         posts.innerHTML+=
         //place our html code here
         `
@@ -33,8 +31,8 @@ async function getData(req,res)
         <td>${item.ddate}</td>
         <td>${item.dtime}</td>
         <td><span class="options">
-        <i onClick="editPost('${item.ID}')" title="edit" class="fas fa-edit"></i>
-        <i onClick="deletePost('${item.ID}')" title="delete" class="fas fa-trash-alt"></i>
+        <i onClick="editPost('${item.id}')" title="edit" class="fas fa-edit"></i>
+        <i onClick="deletePost('${item.id}')" title="delete" class="fas fa-trash-alt"></i>
         </span></td>
         </table>
         `
@@ -47,17 +45,18 @@ async function getData(req,res)
 //add eventListener that will response on submit button clicked
 form.addEventListener("submit",(e)=>{
   //to prevent it refreshed by it self everytime we pressed submit
-  e.preventDefault()
+ e.preventDefault()
   console.log("button click cek is edit",isEdit);
   if(isEdit)
   {
+    console.log(isEdit);
+    console.log(IDGlobal);
     editPost2(IDGlobal)
   }
   else{
    CekForm()
   isEdit=false}
   })
-
 //untuk pengecekan isi input ada ato tidak
  CekForm=()=>
  {
@@ -80,7 +79,6 @@ form.addEventListener("submit",(e)=>{
     acceptPost();
   }
  }
-
 async function acceptPost()
  { 
     try 
@@ -89,7 +87,8 @@ async function acceptPost()
       {
         todo: document.getElementById("input").value,
         ddate:document.getElementById("dDate").value,
-        dtime:document.getElementById("dTime").value }
+        dtime:document.getElementById("dTime").value 
+      }
       const res = await fetch ("http://localhost:5000", {
         method : "POST",
         body: JSON.stringify(savePost),
@@ -103,11 +102,11 @@ async function acceptPost()
     {
         console.log(err);
     }
+    window.location.reload()
  }
-
 async function deletePost(ID)
 {
-  console.log(ID);
+  //console.log(ID);
   try {
     console.log("data ID yg dihapus",ID);
     const res = await fetch(`http://localhost:5000/${ID}`, {
@@ -117,39 +116,41 @@ async function deletePost(ID)
   catch (err) {
   console.log(err);
   }
+  window.location.reload()
 }
-
 async function editPost(ID)
 {
+  //tampung data untuk tampilin di html value yg mau diedit
   const res = await fetch("http://localhost:5000") 
-  const data = await res.json();
-  const tampung =[];
+  const data = await res.json()
+  console.log('edit data',data);
+  console.log("id",ID);
+  //const tampung =[];
   data.find((item) =>{
-    if (item.ID==ID)
+  if (item.id==ID)
     {
       const tampung=item
-      input.value =tampung.ToDo
-      dDate.value=tampung.dDate
-      dTime.value=tampung.dTime
+      input.value =tampung.todo
+      dDate.value=tampung.ddate
+      dTime.value=tampung.dtime
       isEdit=true;
       IDGlobal=ID;
     }
   })
 }
-
 async function editPost2(ID)
 {
   try {
-    const res=await fetch(`http://localhost:5000/${ID}`,
-    {
-      method : "PUT",
-      body : JSON.stringify({
-        ToDo: document.getElementById("input").value,
-        dDate:document.getElementById("dDate").value,
-        dTime:document.getElementById("dTime").value
-
-      }
-      ), headers: {
+    console.log("data ID yg diedit",ID);
+    const edit={
+    todo: document.getElementById("input").value,
+    ddate:document.getElementById("dDate").value,
+    dtime:document.getElementById("dTime").value
+  }
+    const res = await fetch(`http://localhost:5000/${ID}`, {
+      method: "PUT",
+      body : JSON.stringify(edit), 
+      headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
     })
@@ -157,4 +158,5 @@ async function editPost2(ID)
   catch (err) {
     console.log(err);
   }
+  window.location.reload()
 }
