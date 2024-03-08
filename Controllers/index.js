@@ -4,8 +4,9 @@ const dateFormat = require('date-and-time');
 //random unique ID NPM
 const { v4: uuidv4 } = require('uuid');
 
-//db connection
-const knex = require ('../db/knex')
+//db connection with knexfile.js
+const knexfile=require('../knexfile')
+const knex = require('knex')(knexfile.development)
 
 exports.getdata=async(req,res)=>
 {
