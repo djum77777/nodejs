@@ -23,7 +23,6 @@ exports.getdata=async(req,res)=>
       ddate:tgl,
       dtime:item.dtime,
       reminder:item.reminder
-
     }
     mydata.push(tampung)
   });
