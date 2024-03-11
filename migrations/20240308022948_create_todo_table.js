@@ -8,7 +8,9 @@ exports.up = function(knex) {
           table.increments('id').primary;
           table.string('todo', 200).notNullable();
           table.date('ddate').notNullable();
-          table.timestamps('dtime');
+          table.time('dtime');
+          table.string('reminder',100).notNullable();
+          table.timestamps(true,true)
       })
     }
 /**

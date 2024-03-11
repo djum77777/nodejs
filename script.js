@@ -5,6 +5,7 @@ let msg = document.getElementById("msg")
 let posts=document.getElementById("posts")
 let dDate=document.getElementById("dDate")
 let dTime=document.getElementById("dTime")
+let reminder=document.getElementById("reminder")
 let isEdit=false;
 let IDGlobal;
 
@@ -14,28 +15,23 @@ async function getData(req,res)
     {
       const res = await fetch("http://localhost:5000")
       const data = await res.json();
-      
-      //const DueDate = new Date(data[1].ddate);
-      //let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(DueDate);
-      //let month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(DueDate);
-      //let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(DueDate);
-      //console.log(`${year}-${month}-${day}`);
       data.forEach((item) => {
       //console.log(`Todo : ${item.todo} & ID : ${item.id}`)
-        posts.innerHTML+=
-        //place our html code here
-        `
-        <table>
-        <tr>
-        <td>${item.todo}</td>
-        <td>${item.ddate}</td>
-        <td>${item.dtime}</td>
-        <td><span class="options">
-        <i onClick="editPost('${item.id}')" title="edit" class="fas fa-edit"></i>
-        <i onClick="deletePost('${item.id}')" title="delete" class="fas fa-trash-alt"></i>
-        </span></td>
-        </table>
-        `
+      posts.innerHTML+=
+      //place our html code here
+      `
+      <table>
+      <tr>
+      <td>${item.todo}</td>
+      <td>${item.ddate}</td>
+      <td>${item.dtime}</td>
+      <td><span class="options">
+      <i onClick="editPost('${item.id}')" title="edit" class="fas fa-edit"></i>
+      <i onClick="deletePost('${item.id}')" title="delete" class="fas fa-trash-alt"></i>
+      </span></td>
+      <td>${item.reminder}</td>
+      </table>
+      `
       });
     }
     catch (err)

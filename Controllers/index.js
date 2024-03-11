@@ -1,5 +1,5 @@
 const fs= require ('fs')
-const dateFormat = require('date-and-time');
+const format=require('date.format');
 
 //random unique ID NPM
 const { v4: uuidv4 } = require('uuid');
@@ -10,16 +10,58 @@ const knex = require('knex')(knexfile.development)
 
 exports.getdata=async(req,res)=>
 {
-  let data = await knex.select().table('todo')
-  //console.log('data server',data);
-  res.status(200).json(data)
+  //make the order by due date ascending
+  let data = (await knex.select().table('todo').orderBy('ddate','asc'))
+  //console.log('server',data);
+  const mydata=[]
+  data.forEach(item => {
+    const date=item.ddate
+    const tgl=date.format("{YYYY}-{MM}-{DD}");
+    const tampung={
+      id:item.id,
+      todo:item.todo,
+      ddate:tgl,
+      dtime:item.dtime,
+      reminder:item.reminder
+
+    }
+    mydata.push(tampung)
+  });
+  //console.log(mydata);
+  res.status(200).json(mydata)
 }
 
 exports.postdata=async(req,res)=>
 {
   let {todo,ddate,dtime}=req.body
-  console.log('isi insert data',req.body);
-  const getData=await knex('todo').insert(req.body)
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().split('T')[0];
+  //console.log(formattedDate); // Example output: "2024-03-10"
+  // reminder =0 if today is the due date, 1=if far from duedate, -1 = if passed duedate
+  let reminder=0;
+  if (ddate==formattedDate)
+  {
+    console.log(`Due date is today : ${ddate} vs ${formattedDate}`);
+    reminder="duedate"
+  }
+  else if (ddate>formattedDate)
+  {
+    console.log(`due date still days to go: ${ddate} vs ${formattedDate}`);
+    reminder="days to go"
+  }
+  else
+  {
+    console.log(`passed the date ${ddate} vs ${formattedDate}`);
+    reminder="overdue"
+  }
+  const tampung={
+    todo:todo,
+    ddate:req.body.ddate,
+    dtime:req.body.dtime,
+    reminder:reminder
+  }
+  console.log('isi data',tampung);
+  const getData=await knex('todo').insert(tampung)
   const dataUpdate=await knex.select().table('todo')
   res.send(dataUpdate) //untuk kirim data tersimpan
 }
