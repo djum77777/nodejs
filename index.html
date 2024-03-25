@@ -11,19 +11,18 @@
 </head>
 <body>
     <div class="header">
-    <h1 align="center">
-        <div class="container">
-        <img src="./public/clock.png" width="80px">
+    <h1>
+        <div class="container" style="display: flex; flex-wrap: wrap;">
         <div class="rotate1"><span>N</span></div>
         <div class="rotate2"><span>O</span></div>
         <div class="rotate3"><span>O</span></div>
         <div class="rotate4"><span>B</span></div>
         <div><p style="font-size: 20px;">PLANNER</p></div>
-    </div> 
-        </h1>
+        </div> 
+    </h1>
     </div>
-    <p id="dateLoc">Date: <span id="curDate"></span></p> 
-    <div align ="center" class="postNote">
+    <p style="font-weight: bold ;" id="dateLoc">Date:<span id="curDate"></span></p> 
+    <div align ="center" class="postNote" style="align-items: center; display: flex; flex-wrap: wrap;">
         <form id="form">
             <label for="post"> Plan your work and work your plan <i class="fas fa-clock"></i></label>
             <br><br>
@@ -43,23 +42,23 @@
                 <th style="width: 40%;">To Do</th>
                 <th style="width: 20%;">Due Date</th>
                 <th style="width: 10%;">Time</th>
-                <th style="width: 15%;">Action</th>
-                <th style="width: 15%;">Reminder</th>
-            </tr>
-                
+                <th style="width: 10%;">Action</th>
+                <th style="width: 20%;">Reminder</th>
+            </tr>        
         <!--posts entry-->  
         </table> 
-        
     </div>
     <br><br><br>
 
-    <footer>
-        <p>Created by : Mariana</p>
+    <footer id="foot">
+        <br><p><ul>Created by : Mariana</ul>  <ul>Copyright <span id="curYear"></span></ul>  <ul><a style="color:white" href="#">Contact Us</a></ul></p>
     </footer>      
 <script>
 var today = new Date();
+var year=new Date().getFullYear()
 var curDate = today.getFullYear() + '-' + '0'+(today.getMonth() + 1) + '-' + today.getDate();
 document.getElementById('curDate').textContent = curDate;
+document.getElementById('curYear').innerHTML=year;
 </script>
 <script src="script.js"></script>
 </body>

@@ -1,0 +1,72 @@
+untuk bisa membuat table dan melakukan proses migrasi melalui js maka kt perlu menjalankan perintah 
+'knex init' di terminal ( kl tidak bs jln di terminal powershell bs dijalankan di terminal cmd ato gitbash)
+
+stlh knex init, maka akan terbentuk file knexfile.js
+
+terus kt masuk ke sistem koneksi ke db kt di pgadmin di bagian development saja(buat diawal) melalui file knexfile.js
+module.exports = {
+
+  development: {
+    client: 'pg',
+    connection: {
+      host:'localhost',
+      port:5432,
+      user:'postgres',
+      password:'imlot007',
+      database:'course MVC' nama database yg udh kt buat di pgadmin
+    }
+  }}
+
+after that
+we can create a table using terminal by typing : knex migrate:make create_store_table 
+means we are create a table name store (kl gagal dibuat di terminal powershell,pake terminal cmd aja)
+then it will creating another new folder named : migrations 
+inside that will be a file with table store details and 
+we need to create the properties of the table there
+example :
+exports.up = function(knex) {
+    return knex.schema
+      .createTable('product', function (table) {
+          table.increments('id').primary;
+          table.string('name', 100).notNullable();
+          table.integer('price').notNullable();
+          table.integer('stock');
+          table.integer('store_id').notNullable();
+          table.foreign('store_id').references('store.id') //untuk link table store dan product
+          table.timestamps(); //akan mengenerate created at sm updated at
+      })
+    }
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.down = function(knex) {
+  return knex.schema.dropTable('product')
+};
+
+kemudian untuk bs kt push jd tercreate table di pgadmin kt bs gunakan perintah ini di terminal 
+knex migrate:latest untuk push
+atau 
+knex migrate:rollback untuk tarik balik yg udh kt push
+
+and next we can try to create other table as well using the same steps
+
+kl kt mau buat data dummy untuk table kt kt bs pake knex seed dgn command
+knex seed:make seed_<tableName>
+ex: we are making seed for table store
+knex seed:make seed_store
+then it will create a new folder call seeds with a seed_store.js
+then we input the data inside the seed_store.js ,something like this:
+exports.seed = async function(knex) {
+  // Deletes ALL existing entries
+  await knex('store').del()
+  await knex('store').insert([
+    {id: 1, name: 'Toko Djumi', address:'Jakarta'},
+    {id: 2, name: 'Toko Erni', address:'Aceh'},
+    {id: 3, name: 'Toko Amin', address:'Medan'}
+  ]);
+};
+
+after that we run command : knex seed:run
+maka insert yg kt buat akan masuk ke table store
+

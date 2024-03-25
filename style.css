@@ -1,8 +1,9 @@
 .header{
   display: flex;
-  background-size: 500px;
   justify-content: center;
   background-color: brown;
+  left:0;
+  width: 100%;
   border-radius: 5px;
 }
 .rotate1{
@@ -21,6 +22,10 @@
   transform: rotate(-25deg);
   color: yellow;
 }
+.input{
+  display: flex;
+  flex-wrap: wrap;
+}
 .postNote,.todolist{
   display: flex;
   justify-content: center;
@@ -30,6 +35,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   padding: 0 50px;
   background-color: rgb(101, 201, 204);
+}
+.form{
+  display: flex;
 }
 #posts {
   width: 600px;
@@ -54,7 +62,12 @@ i{
   font-weight: 600;
   font-family:arial,Verdana,Tahoma, sans-serif;
 }
- 
+
+input{
+  border-radius: 5px;
+  background-color: rgb(209, 206, 206);
+  color: rgb(74, 73, 73);
+}
 .options {
   display: flex;
   align-items:center;
@@ -138,10 +151,10 @@ textarea {
   background-position: 10px 20px;
   opacity: 0.7;
   padding-left: 40px;
-  border-radius: 25px;
+  border-radius: 10px;
   border: 2px solid #656564;
   padding: 20px; 
-  width: 350px;
+  width: 20vw;
   height: 15px;  
   }
 caption{
@@ -149,12 +162,15 @@ caption{
 }
 
 footer {
+  display:flex;
   font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  padding: 3px;
   background-color: brown;
   color: white;
   border-radius: 5px;
+  position:fixed;
+  left:0;
+  bottom:0;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
 }
